@@ -1,5 +1,6 @@
 import org.arquillian.spacelift.gradle.*
 import org.arquillian.spacelift.gradle.maven.*
+import org.arquillian.spacelift.gradle.utils.*
 import org.arquillian.spacelift.execution.Tasks
 import org.arquillian.spacelift.process.impl.CommandTool
 import org.arquillian.spacelift.process.CommandBuilder
@@ -37,13 +38,20 @@ spacelift {
                 def m2 = System.getenv("M2")
                 def m2_home = System.getenv("M2_HOME")
 
-                if (m2 != null && !m2.isEmpty()) {
-                    return Tasks.prepare(CommandTool).command(new CommandBuilder("${m2}/mvn"))
-                } else if (m2_home != null && !m2_home.isEmpty()) {
-                    return Tasks.prepare(CommandTool).command(new CommandBuilder("${m2_home}/bin/mvn"))
+                def mvnPath = null
+                if (m2 != null && !m2.isEmpty() && (new File(m2, 'mvn')).exists()) {
+                    mvnPath = new File(new File(m2), 'mvn').getCanonicalPath()
+                } else if (m2_home != null && !m2_home.isEmpty() && (new File(m2_home, 'mvn')).exists()) {
+                    mvnPath = new File(new File(m2_home), 'mvn').getCanonicalPath()
                 } else {
-                    return Tasks.prepare(CommandTool).command(new CommandBuilder("mvn"))
+                    mvnPath = "mvn"
                 }
+
+                if(EnvironmentUtils.runsOnWindows()) {
+                    mvnPath += '.bat'
+                }
+
+                return Tasks.prepare(CommandTool).command(new CommandBuilder(mvnPath))
             }
         }
     }
