@@ -18,6 +18,7 @@ ext {
 
     // selenium server instance holder
     seleniumVersion = '2.43.1'
+    iedriverVersion = '2.43.0'
     phantomjsVersion = '1.9.8'
 }
 
@@ -57,7 +58,7 @@ spacelift {
     }
     profiles {
         "default" {
-            enabledInstallations 'selenium', 'phantomjs'
+            enabledInstallations 'selenium', 'phantomjs', 'iedriver'
             tests '*'            
         }
     }
@@ -91,6 +92,13 @@ spacelift {
                 project.ant.chmod(dir: "${home}", perm:"a+x", includes:"**/*phantomjs*")
             }
         }
+        iedriver {
+            product 'iedriver'
+            version project.iedriverVersion
+            remoteUrl "http://selenium-release.storage.googleapis.com/${version.substring(0,4)}/IEDriverServer_x64_${version}.zip"
+            home "iedriver-${version}"
+            extractMapper { toDir(home).cutdirs() }
+        }
 
         // this installation can be used if there is a need to test against not yet release version of arquillian-phantom-driver
         arquillianPhantomDriver {
@@ -120,10 +128,18 @@ spacelift {
                 }
             }
             beforeSuite {
+
+                def phantomjsPath = "${phantomjs.home}/bin/phantomjs"
+                if(EnvironmentUtils.runsOnWindows()) {
+                    phantomjsPath += '.exe'
+                }
+                
+
                 // start selenium server, we need it for tests
                 seleniumServer = GradleSpacelift.tools('seleniumserver')
                     .workingDir("${project.spacelift.workspace}")
-                    .parameter("-Dphantomjs.binary.path=${phantomjs.home}/bin/phantomjs")
+                    .parameter("-Dphantomjs.binary.path=${phantomjsPath}")
+                    .parameter("-Dwebdriver.ie.driver=${iedriver.home}/IEDriverServer.exe")
                     .interaction(GradleSpacelift.ECHO_OUTPUT)
                     .execute()
             }
