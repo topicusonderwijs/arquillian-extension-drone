@@ -176,7 +176,17 @@
         <artifactId>phantomjsdriver</artifactId>
         <version>${phantomjs.driver.version}</version>
       </dependency>
-
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy</artifactId>
+        <version>${version.bytebuddy}</version>
+      </dependency>
+      <dependency>
+        <groupId>net.bytebuddy</groupId>
+        <artifactId>byte-buddy-agent</artifactId>
+        <version>${version.bytebuddy}</version>
+      </dependency>
+      
       <!-- Testing dependencies -->
       <dependency>
         <groupId>org.jboss.arquillian.container</groupId>

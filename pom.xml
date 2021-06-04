@@ -51,6 +51,7 @@
     <version.hoverfly.java>0.14.0</version.hoverfly.java>
     <version.awaitility>4.1.0</version.awaitility>
     <version.arquillian.spacelift>1.0.2</version.arquillian.spacelift>
+    <version.bytebuddy>1.11.1</version.bytebuddy>
 
     <!-- To avoid collisions with Jetty version we are using the same as packaged in Selenium Server -->
     <version.org.eclipse.jetty>9.4.12.v20180830</version.org.eclipse.jetty>
