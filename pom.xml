@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.jboss</groupId>
     <artifactId>jboss-parent</artifactId>
-    <version>37</version>
+    <version>38</version>
     <relativePath />
   </parent>
 
@@ -37,22 +37,23 @@
   <properties>
     <!-- Versioning -->
     <version.arquillian.core>1.6.0.Final</version.arquillian.core>
-    <version.selenium>3.11.0</version.selenium>
-    <version.htmlunit.driver>2.28</version.htmlunit.driver>
+    <version.selenium>3.141.59</version.selenium>
+    <version.selenium-bom>3.141.59-topicus1</version.selenium-bom>
+    <version.htmlunit.driver>2.50.0</version.htmlunit.driver>
     <phantomjs.driver.version>1.4.4</phantomjs.driver.version>
-    <version.appium.java.client>5.0.0-BETA9</version.appium.java.client>
+    <version.appium.java.client>7.5.1</version.appium.java.client>
 
     <!-- Test bits versions -->
-    <version.junit>4.13.1</version.junit>
+    <version.junit>4.13.2</version.junit>
     <version.assertj>3.19.0</version.assertj>
-    <version.mockito>2.3.11</version.mockito>
+    <version.mockito>3.11.0</version.mockito>
     <version.system.rules>1.19.0</version.system.rules>
-    <version.hoverfly.java>0.12.1</version.hoverfly.java>
-    <version.awaitility>3.1.6</version.awaitility>
+    <version.hoverfly.java>0.14.0</version.hoverfly.java>
+    <version.awaitility>4.1.0</version.awaitility>
     <version.arquillian.spacelift>1.0.2</version.arquillian.spacelift>
 
     <!-- To avoid collisions with Jetty version we are using the same as packaged in Selenium Server -->
-    <version.org.eclipse.jetty>9.4.7.v20170914</version.org.eclipse.jetty>
+    <version.org.eclipse.jetty>9.4.12.v20180830</version.org.eclipse.jetty>
     <version.arquillian.jetty>1.0.0.CR3</version.arquillian.jetty>
 
     <!-- override from parent -->
@@ -79,7 +80,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>animal-sniffer-maven-plugin</artifactId>
-        <version>1.18</version>
+        <version>1.20</version>
         <executions>
           <execution>
             <id>signature-check</id>
